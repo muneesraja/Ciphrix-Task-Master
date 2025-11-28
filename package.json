@@ -1,0 +1,14 @@
+{
+  "name": "mern-task-manager",
+  "version": "1.0.0",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"bun run --cwd apps/api dev\" \"bun run --cwd apps/web dev\"",
+    "build": "bun run --cwd apps/web build && bun run --cwd apps/api build"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

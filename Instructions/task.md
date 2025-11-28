@@ -1,0 +1,21 @@
+# Task List
+
+- [x] **Project Initialization**
+    - [x] Initialize Monorepo (Bun Workspaces)
+    - [x] Setup `concurrently` for running apps
+    - [x] Configure Tailwind CSS v4
+- [x] **Backend Development**
+    - [x] Setup Express Server & Database Connection (MongoDB)
+    - [x] Implement Authentication (JWT, Roles: Admin/User)
+    - [x] Implement Task CRUD APIs (with Role-based access control)
+- [x] **Frontend Development**
+    - [x] Setup React + Vite + Zustand
+    - [x] Implement Authentication Pages (Sign In, Sign Up)
+    - [x] Implement Dashboard (Task List, Pagination, Search/Filter)
+    - [x] Implement Task Management (Create, Edit)
+    - [x] Implement Admin Features (Delete Task)
+    - [x] Implement Dark/Light Theme Switcher
+- [x] **Docker & Deployment**
+    - [x] Create Dockerfiles for Web and API
+    - [x] Create docker-compose.yml
+    - [ ] Verify Build and Run

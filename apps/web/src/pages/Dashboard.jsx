@@ -13,6 +13,9 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { TaskDialog } from '@/components/TaskDialog';
 import { Pencil, Trash2, Plus, Bell } from 'lucide-react';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { Toaster, toast } from 'sonner';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Dashboard = () => {
   const { tasks, fetchTasks, deleteTask, page, pages, isLoading } = useTaskStore();
@@ -36,7 +39,12 @@ const Dashboard = () => {
 
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this task?')) {
-      await deleteTask(id);
+      try {
+        await deleteTask(id);
+        toast.success('Task deleted successfully');
+      } catch (error) {
+        toast.error('Failed to delete task');
+      }
     }
   };
 
@@ -48,12 +56,14 @@ const Dashboard = () => {
 
   return (
     <div className="space-y-8">
+      <Toaster position="top-center" richColors />
       {/* Header Section */}
       <div className="flex items-center justify-between">
         <div className="space-y-1">
            {/* Placeholder for breadcrumbs or top nav if needed */}
         </div>
         <div className="flex items-center gap-4">
+            <ThemeToggle />
             <Button variant="outline" size="icon" className="rounded-full">
                 <Bell className="h-4 w-4" />
             </Button>
@@ -81,6 +91,7 @@ const Dashboard = () => {
                 </TableRow>
             </TableHeader>
             <TableBody>
+                <AnimatePresence mode="popLayout">
                 {isLoading ? (
                 <TableRow>
                     <TableCell colSpan={5} className="h-24 text-center">
@@ -95,7 +106,15 @@ const Dashboard = () => {
                 </TableRow>
                 ) : (
                 tasks.map((task) => (
-                    <TableRow key={task._id} className="hover:bg-muted/50">
+                    <motion.tr
+                        key={task._id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.2 }}
+                        className="hover:bg-muted/50 border-b transition-colors data-[state=selected]:bg-muted"
+                        style={{ display: 'table-row' }}
+                    >
                     <TableCell className="font-medium text-foreground">{task.title}</TableCell>
                     <TableCell className="text-muted-foreground">{task.description}</TableCell>
                     <TableCell>
@@ -130,9 +149,10 @@ const Dashboard = () => {
                             )}
                         </div>
                     </TableCell>
-                    </TableRow>
+                    </motion.tr>
                 ))
                 )}
+                </AnimatePresence>
             </TableBody>
             </Table>
             </div>

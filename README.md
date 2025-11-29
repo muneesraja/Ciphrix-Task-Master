@@ -52,7 +52,7 @@ This will spin up the Frontend, Backend, and MongoDB database in containers.
 docker-compose up --build
 ```
 
--   **Frontend**: http://localhost:80
+-   **Frontend**: http://localhost:5002
 -   **Backend**: http://localhost:5001
 
 ### Option 2: Run Locally

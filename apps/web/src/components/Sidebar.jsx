@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Folder, Settings, LogOut, User as UserIcon, Moon, Sun } from 'lucide-react';
+import { LayoutDashboard, Folder, Settings, LogOut, User as UserIcon, Moon, Sun, CheckCircle2 } from 'lucide-react';
 import useAuthStore from '@/store/authStore';
 import { useTheme } from '@/components/theme-provider';
 import { Button } from '@/components/ui/button';
@@ -16,19 +16,8 @@ export const SidebarContent = () => {
     <div className="flex h-full flex-col justify-between bg-card px-4 py-6">
       <div>
         <div className="mb-8 flex items-center gap-2 px-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-5 w-5 text-primary-foreground"
-            >
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-            </svg>
+          <div className="flex items-center gap-2 text-blue-500">
+            <CheckCircle2 className="h-8 w-8" />
           </div>
           <span className="text-xl font-bold tracking-tight">TaskMaster</span>
         </div>
@@ -69,18 +58,7 @@ export const SidebarContent = () => {
       </div>
 
       <div className="space-y-4">
-        <div className="flex items-center justify-between rounded-lg bg-muted/50 p-2">
-            <span className="text-sm font-medium ml-2">Theme</span>
-            <Button
-                variant="ghost"
-                size="icon"
-                className="relative h-8 w-8 rounded-full overflow-hidden transition-all duration-500 hover:bg-background"
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            >
-                <Sun className={`absolute h-5 w-5 transition-all duration-500 ${theme === 'dark' ? 'rotate-90 scale-0' : 'rotate-0 scale-100'}`} />
-                <Moon className={`absolute h-5 w-5 transition-all duration-500 ${theme === 'dark' ? 'rotate-0 scale-100' : '-rotate-90 scale-0'}`} />
-            </Button>
-        </div>
+
 
         {user && (
             <div className="flex items-center gap-3 rounded-lg border p-3">

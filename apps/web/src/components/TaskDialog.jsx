@@ -13,6 +13,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import useTaskStore from '@/store/taskStore';
+import { toast } from 'sonner';
 
 export function TaskDialog({ open, onOpenChange, taskToEdit }) {
   const [title, setTitle] = useState('');
@@ -37,12 +38,15 @@ export function TaskDialog({ open, onOpenChange, taskToEdit }) {
     try {
       if (taskToEdit) {
         await updateTask(taskToEdit._id, { title, description, status });
+        toast.success('Task updated successfully');
       } else {
         await createTask({ title, description, status });
+        toast.success('Task created successfully');
       }
       onOpenChange(false);
     } catch (error) {
       console.error(error);
+      toast.error('Failed to save task');
     }
   };
 

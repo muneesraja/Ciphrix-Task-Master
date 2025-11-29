@@ -12,8 +12,7 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { TaskDialog } from '@/components/TaskDialog';
-import { Pencil, Trash2, Plus, Bell } from 'lucide-react';
-import { ThemeToggle } from '@/components/ThemeToggle';
+import { Pencil, Trash2, Plus } from 'lucide-react';
 import { Toaster, toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -57,18 +56,7 @@ const Dashboard = () => {
   return (
     <div className="space-y-8">
       <Toaster position="top-center" richColors />
-      {/* Header Section */}
-      <div className="flex items-center justify-between">
-        <div className="space-y-1">
-           {/* Placeholder for breadcrumbs or top nav if needed */}
-        </div>
-        <div className="flex items-center gap-4">
-            <ThemeToggle />
-            <Button variant="outline" size="icon" className="rounded-full">
-                <Bell className="h-4 w-4" />
-            </Button>
-        </div>
-      </div>
+
 
       <div className="space-y-4">
         <div className="flex items-center justify-between">
@@ -78,12 +66,12 @@ const Dashboard = () => {
             </Button>
         </div>
         
-        <div className="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden">
+        <div className="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden max-w-[calc(100vw-2rem)] md:max-w-none">
             <div className="overflow-x-auto">
             <Table>
             <TableHeader>
                 <TableRow className="hover:bg-transparent">
-                <TableHead className="w-[300px] text-xs font-semibold uppercase tracking-wider text-muted-foreground">Task Title</TableHead>
+                <TableHead className="min-w-[200px] text-xs font-semibold uppercase tracking-wider text-muted-foreground">Task Title</TableHead>
                 <TableHead className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Description</TableHead>
                 <TableHead className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Status</TableHead>
                 <TableHead className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Created Date</TableHead>

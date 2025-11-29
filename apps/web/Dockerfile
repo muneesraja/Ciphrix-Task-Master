@@ -14,6 +14,8 @@ COPY apps/web ./apps/web
 WORKDIR /app/apps/web
 
 # Build the app
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
 RUN bun run build
 
 # Production stage

@@ -4,7 +4,7 @@ import useAuthStore from '@/store/authStore';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Bell } from 'lucide-react';
@@ -12,6 +12,11 @@ import { Bell } from 'lucide-react';
 const Layout = () => {
   const { user } = useAuthStore();
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    // Attempt to hide the URL bar on mobile
+    window.scrollTo(0, 1);
+  }, []);
 
   if (!user) {
     return <Navigate to="/signin" />;

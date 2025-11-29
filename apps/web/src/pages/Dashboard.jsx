@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { TaskDialog } from '@/components/TaskDialog';
-import { Pencil, Trash2, Plus } from 'lucide-react';
+import { Pencil, Trash2, Plus, Loader2 } from 'lucide-react';
 import { Toaster, toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -54,11 +54,10 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="flex flex-col min-h-full space-y-8">
       <Toaster position="top-center" richColors />
 
-
-      <div className="space-y-4">
+      <div className="space-y-4 flex-1 flex flex-col">
         <div className="flex items-center justify-between">
             <h2 className="text-3xl font-bold tracking-tight">All Tasks</h2>
             <Button onClick={handleAdd} className="bg-blue-600 hover:bg-blue-700 text-white font-medium">
@@ -79,13 +78,21 @@ const Dashboard = () => {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                <AnimatePresence mode="popLayout">
+                <AnimatePresence mode="wait">
                 {isLoading ? (
-                <TableRow>
+                <motion.tr
+                    key="loading"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                >
                     <TableCell colSpan={5} className="h-24 text-center">
-                    Loading...
+                    <div className="flex justify-center items-center h-full">
+                      <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
+                    </div>
                     </TableCell>
-                </TableRow>
+                </motion.tr>
                 ) : tasks.length === 0 ? (
                 <TableRow>
                     <TableCell colSpan={5} className="h-24 text-center">
@@ -145,9 +152,10 @@ const Dashboard = () => {
             </Table>
             </div>
         </div>
+      </div>
 
-        {pages > 1 && (
-            <div className="flex items-center justify-center space-x-2 py-4">
+      {pages > 1 && (
+            <div className="sticky bottom-0 bg-background/95 backdrop-blur py-4 flex items-center justify-center space-x-2 z-10 border-t mt-auto">
             <Button
                 variant="outline"
                 size="icon"
@@ -182,8 +190,7 @@ const Dashboard = () => {
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="m9 18 6-6-6-6"/></svg>
             </Button>
             </div>
-        )}
-      </div>
+      )}
 
       <TaskDialog
         open={isDialogOpen}

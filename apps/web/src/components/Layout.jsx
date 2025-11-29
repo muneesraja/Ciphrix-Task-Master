@@ -23,11 +23,11 @@ const Layout = () => {
   }
 
   return (
-    <div className="flex min-h-screen bg-background font-sans antialiased">
+    <div className="flex min-h-[100dvh] bg-background font-sans antialiased">
       {/* Desktop Sidebar */}
       <Sidebar className="hidden md:flex h-screen w-64 flex-col fixed inset-y-0 z-50" />
 
-      <div className="flex-1 md:pl-64 flex flex-col min-h-screen">
+      <div className="flex-1 md:pl-64 flex flex-col min-h-[100dvh]">
         {/* Global Header */}
         <header className="sticky top-0 z-40 flex h-16 items-center gap-4 border-b bg-background px-6">
           {/* Mobile Menu Trigger & Branding */}
@@ -55,7 +55,7 @@ const Layout = () => {
           </div>
         </header>
 
-        <main className="flex-1 overflow-y-auto bg-background/50 p-4 md:p-8">
+        <main className="flex-1 overflow-y-auto bg-background/50 p-4 md:p-8 pb-24">
           <Outlet />
         </main>
       </div>
